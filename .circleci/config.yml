@@ -6,6 +6,11 @@ jobs:
       - image: circleci/openjdk:11-jdk
     steps:
       - checkout
+      - run:
+          command:
+            git fetch --all;
+            git branch -D master;
+            git rev-parse origin/master;
       - restore_cache:
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
       - run: mvn dependency:go-offline
